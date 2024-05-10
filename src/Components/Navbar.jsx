@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import Logo from '../assets/logo/logo-Final.png'
 import { FaBars } from 'react-icons/fa';
+import useAuth from '../Hook/useAuth';
 const Navbar = () => {
+    const {user,LogOutUser}=useAuth();
+    
 
     const links = <>
         <li><Link to='/'>Home</Link></li>
@@ -30,8 +33,21 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-3 ">
-                    <Link to='/login' className="btn rounded-sm md:btn-md btn-sm btn-outline">Log in</Link>
-                    <Link to='/singup' className="btn rounded-sm md:btn-md btn-sm  btn-outline">Sign up</Link>
+                    {user ?
+                        <>
+                            <div className="avatar online">
+                                <div className="w-14 rounded-full">
+                                    <img src={user.photoURL?user.photoURL:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/1200px-Unknown_person.jpg"} />
+                                </div>
+                            </div>
+                            <div>
+                                <a onClick={LogOutUser} className="btn rounded-sm md:btn-md btn-sm btn-outline">Log out</a>
+                            </div>
+                        </> :
+                        <>
+                            <Link to='/login' className="btn rounded-sm md:btn-md btn-sm btn-outline">Log in</Link>
+                            <Link to='/singup' className="btn rounded-sm md:btn-md btn-sm  btn-outline">Sing up</Link>
+                        </>}
                 </div>
             </div>
         </nav>

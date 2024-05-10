@@ -12,7 +12,7 @@ const Review = () => {
     }
     getData()
   }, [])
-  console.log(reviews);
+//   console.log(reviews);
 
     return (
         <div>

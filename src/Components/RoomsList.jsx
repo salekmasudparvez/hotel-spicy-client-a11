@@ -1,33 +1,49 @@
 
-const RoomsList = () => {
+import { PropTypes } from 'prop-types';
+import { FaLuggageCart } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+const RoomsList = ({room}) => {
+    const { RoomImages, title, PricePerNight, Availability ,_id} = room
+    const navigateList = useNavigate()
+
+   
+    const handleBooking =()=>{
+        console.log("booking");
+    } 
+    const handleNavigate=(id)=>{
+        navigateList(`/rooms/${id}`)
+        
+    }
     return (
         <>
-            <tr className="border-b border-opacity-20 border-gray-700 ">
-                <td className="p-3">
-                    <p>97412378923</p>
+            <tr  className="border-b border-opacity-20 border-gray-700  text-center hover:bg-neutral-300 ">
+                <td onClick={()=>handleNavigate(_id)} className="p-3 ">
+                    <div className="avatar">
+                        <div className="w-24 mask mask-hexagon">
+                            <img src={RoomImages} />
+                        </div>
+                    </div>
                 </td>
-                <td className="p-3">
-                    <p>Microsoft Corporation</p>
+                <td onClick={()=>handleNavigate(_id)} className="p-3">
+                    <p>{title}</p>
                 </td>
-                <td className="p-3">
-                    <p>14 Jan 2022</p>
-                    <p className="text-gray-400">Friday</p>
+                <td onClick={()=>handleNavigate(_id)} className="p-3 ">
+                    <p>{Availability?"Yes":"No"}</p>
+                    
                 </td>
-                <td className="p-3">
-                    <p>01 Feb 2022</p>
-                    <p className="text-gray-400">Tuesday</p>
+                <td onClick={()=>handleNavigate(_id)} className="p-3">
+                    <p className="text-gray-400">{PricePerNight}$</p>
                 </td>
-                <td className="p-3 text-right">
-                    <p>$15,792</p>
-                </td>
-                <td className="p-3 text-right">
-                    <span className="px-3 py-1 font-semibold rounded-md bg-violet-400 text-gray-900">
-                        <span>Pending</span>
-                    </span>
+                <td className="">
+                <a onClick={handleBooking} className={`btn rounded-sm btn-md btn-outline ${!Availability && "btn-disabled"}`}>Book <FaLuggageCart /></a>
                 </td>
             </tr>
         </>
     );
 };
+
+RoomsList.propTypes={
+    room:PropTypes.object
+}
 
 export default RoomsList;

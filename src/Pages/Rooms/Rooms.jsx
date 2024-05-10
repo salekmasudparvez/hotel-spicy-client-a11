@@ -19,7 +19,7 @@ const Rooms = () => {
     }, []);
     //   console.log(rooms);
     return (
-        <div className="md:mx-10 mx-2 ">
+        <div className="md:mx-10 mx-2 space-y-4">
             <div className="md:py-14 py-6 space-y-3 text-center">
                 <h1 className="text-5xl font-bold ">Find Rooms</h1>
                 <p>You can find a room easily with price range and easy to book .So don&lsquo;t wait.</p>
@@ -49,22 +49,22 @@ const Rooms = () => {
                 </div>
                 :
                 <div className="overflow-x-auto">
-                    <table className="min-w-full text-xs">
+                    <table className="min-w-full text-xs ">
                         <colgroup>
                             <col />
                             <col />
                             <col />
                             <col />
-                            <col />
+                           
                             <col className="w-24" />
                         </colgroup>
                         <thead >
-                            <tr className="text-left">
-                                <th className="p-3">Invoice #</th>
-                                <th className="p-3">Client</th>
-                                <th className="p-3">Issued</th>
-                                <th className="p-3">Due</th>
-                                <th className="p-3 text-right">Amount</th>
+                            <tr className=" text-center">
+                                <th className="p-3">Room&apos;s Image</th>
+                                <th className="p-3">Name of Room</th>
+                                <th className="p-3">Availability</th>
+                                <th className="p-3">Price Per Night</th>
+                                
                                 <th className="p-3">Status</th>
                             </tr>
                         </thead>

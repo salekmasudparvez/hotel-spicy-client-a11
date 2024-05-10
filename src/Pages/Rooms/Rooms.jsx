@@ -20,7 +20,9 @@ const Rooms = () => {
                 <h1 className="text-5xl font-bold ">Find Rooms</h1>
                 <p>You can find a room easily with price range and easy to book .So don&lsquo;t wait.</p>
             </div>
-            <div className="border"></div>
+            <div className="border">
+                
+            </div>
             <div className="grid gap-4 place-items-center md:grid-cols-2 lg:grid-cols-3 grid-cols-1">
                 {rooms.map((room,idx)=><RoomCard room={room} key={idx}></RoomCard>)}
             </div>

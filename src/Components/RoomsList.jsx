@@ -6,10 +6,6 @@ const RoomsList = ({room}) => {
     const { RoomImages, title, PricePerNight, Availability ,_id} = room
     const navigateList = useNavigate()
 
-   
-    const handleBooking =()=>{
-        console.log("booking");
-    } 
     const handleNavigate=(id)=>{
         navigateList(`/rooms/${id}`)
         
@@ -35,7 +31,7 @@ const RoomsList = ({room}) => {
                     <p className="text-gray-400">{PricePerNight}$</p>
                 </td>
                 <td className="">
-                <a onClick={handleBooking} className={`btn rounded-sm btn-md btn-outline ${!Availability && "btn-disabled"}`}>Book <FaLuggageCart /></a>
+                <a onClick={()=>handleNavigate(_id)} className={`btn rounded-sm btn-md btn-outline ${!Availability && "btn-disabled"}`}>Book <FaLuggageCart /></a>
                 </td>
             </tr>
         </>

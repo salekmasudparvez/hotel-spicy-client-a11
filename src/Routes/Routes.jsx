@@ -7,6 +7,7 @@ import AboutUs from "../Pages/AboutUs/AboutUs";
 import RoomDetails from "../Pages/Rooms/RoomDetails";
 import Login from "../Pages/Login/Login";
 import Singup from "../Pages/Singup/Singup";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
 
 const Routes = createBrowserRouter([
@@ -20,11 +21,12 @@ const Routes = createBrowserRouter([
         },
         {
             path:'/rooms',
-            element:<Rooms/>
+            element:<Rooms/>,
+            loader:()=>fetch('http://localhost:5000/roomsCount')
         },        
         {
             path:'/rooms/:id',
-            element:<RoomDetails/>,
+            element: <PrivateRoutes><RoomDetails/></PrivateRoutes> ,
             loader:({params})=>fetch(`http://localhost:5000/rooms/${params.id}`)
         },        
         {

@@ -1,25 +1,51 @@
 import { FaLuggageCart } from "react-icons/fa";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
-import { useQuery } from "@tanstack/react-query";
+import toast from 'react-hot-toast';
+import axios from "axios";
 
 
 const RoomDetails = () => {
     const data = useLoaderData();
     const { user } = useAuth();
-    const { RoomImages, title, description, PricePerNight, Features, Availability, RoomSize } = data
+    const navigate = useNavigate()
+    const { RoomImages, title, description, PricePerNight, Features, Availability, RoomSize, _id } = data
 
-    const handleBoking = (e) => {
+
+    const handleMyBooking = async e => {
         e.preventDefault()
-        const email = e.target.email.value;
+        // if (user?.email === buyer?.email){return toast.error('Action not permitted!')}
+
+        const clientEmail = e.target.email.value;
         const name = e.target.name.value;
         const date = e.target.date.value;
-        console.log(email, name, date);
+        const bookTitle = title;
+        const image = RoomImages;
+        // console.log(email, name, date);
+
+        const bookingID = _id;
+        const Availability = false
+        const newBooking = {
+            clientEmail,
+            name,
+            date,
+            bookingID,
+            Availability,
+            bookTitle,
+            image
+
+        }
+        try {
+            const { data } = await axios.post('http://localhost:5000/mybooking', newBooking)
+            console.log(data)
+            toast.success('Book Placed Successfully!')
+
+        } catch (errors) {
+            console.log(errors);
+            toast.error('Somthing is going wrong')
+            e.target.reset()
+        }
     }
-    const {isPending}=useQuery({
-       queryKey:['mybooking'],
-       queryFn:()=>fetch('')
-    })
 
 
     return (
@@ -33,7 +59,7 @@ const RoomDetails = () => {
                         <span className="text-xs text-gray-400">Sit Availability :{Availability ? "Yes" : "No"}</span>
                         <div className="flex justify-between"><p> <span className="font-medium">Price Per Night</span> :{PricePerNight} $</p><p> <span className="font-medium">Room Size</span> :{RoomSize}</p> </div>
                         <div className="space-x-4">Fetures:{Features.map((feture, idx) => <span key={idx}>{feture},</span>)}</div>
-                        <form onSubmit={handleBoking}>
+                        <form onSubmit={handleMyBooking}>
                             <label className="input input-bordered flex items-center gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4 opacity-70"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM12.735 14c.618 0 1.093-.561.872-1.139a6.002 6.002 0 0 0-11.215 0c-.22.578.254 1.139.872 1.139h9.47Z" /></svg>
                                 <input type="text" className="grow" name="name" placeholder="Username" value={user?.displayName} />

@@ -8,6 +8,7 @@ import RoomDetails from "../Pages/Rooms/RoomDetails";
 import Login from "../Pages/Login/Login";
 import Singup from "../Pages/Singup/Singup";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
+import Mybooking from "../Pages/Mybooking/Mybooking";
 
 
 const Routes = createBrowserRouter([
@@ -45,6 +46,10 @@ const Routes = createBrowserRouter([
             path:'/singup',
             element:<Singup/>
         },
+        {
+            path:'/mybooking',
+            element:<Mybooking/>
+        }
       ]
     },
   ]);

@@ -18,7 +18,7 @@ const RoomDetails = () => {
 
         const clientEmail = e.target.email.value;
         const name = e.target.name.value;
-        const date = e.target.date.value;
+        const bookingDate = e.target.date.value;
         const bookTitle = title;
         const image = RoomImages;
         // console.log(email, name, date);
@@ -28,7 +28,7 @@ const RoomDetails = () => {
         const newBooking = {
             clientEmail,
             name,
-            date,
+            bookingDate,
             bookingID,
             Availability,
             bookTitle,

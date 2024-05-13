@@ -11,6 +11,7 @@ import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import Mybooking from "../Pages/Mybooking/Mybooking";
 
 
+
 const Routes = createBrowserRouter([
     {
       path: "/",
@@ -48,7 +49,8 @@ const Routes = createBrowserRouter([
         },
         {
             path:'/mybooking',
-            element:<Mybooking/>
+            element:<Mybooking/>,
+            
         }
       ]
     },

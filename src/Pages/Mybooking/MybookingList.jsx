@@ -1,17 +1,17 @@
 
 import Swal from 'sweetalert2';
-
 import { FaRegEdit } from "react-icons/fa";
+import axios from 'axios';
+import { PropTypes } from 'prop-types';
+import useAuth from '../../Hook/useAuth';
+import toast from 'react-hot-toast';
+
+const MybookingList = ({ booking, setMyData, MyData }) => {
+    const {user}=useAuth()
+    const { image, bookTitle, bookingDate, bookingID, _id } = booking;
 
 
-
-const MybookingList = ({ booking,setMyData, MyData}) => {
-    const { image, bookTitle, bookingDate, bookingID, clientEmail, _id } = booking;
-    
-    
-
-
-    const handleDelete = async (id) => {
+    const handleDelete = async (id, bookingID) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -23,21 +23,23 @@ const MybookingList = ({ booking,setMyData, MyData}) => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/mybooking/${id}`, {
-                    method: 'DELETE'
-                })
-                    .then(res => res.json())
-                    .then(data => {
+                axios.delete(`http://localhost:5000/mybooking/${id}`)
+                    .then(response => {
+                        const data = response.data;
                         if (data.deletedCount > 0) {
                             Swal.fire({
                                 title: "Cancel!",
                                 text: "Your file has been Cancelled.",
                                 icon: "success"
                             });
-                            setMyData(!MyData)
-                            
+                            axios.patch(`http://localhost:5000/updateTrue/${bookingID}`, { Availability: true })
+                            setMyData(!MyData);
+
                         }
                     })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
             }
         });
 
@@ -46,13 +48,26 @@ const MybookingList = ({ booking,setMyData, MyData}) => {
     //update
     const handleUpdateDate = (e) => {
         e.preventDefault();
+        const id = _id;
+        const updatedDate = e.target.date.value;
+        axios.patch(`http://localhost:5000/updateDate/${id}`, { updatedDate })
+            .then(response => {
+                const data = response.data;
+                if (data.modifiedCount > 0) {
+                    toast.success('Date update successfully!');
+                    setMyData(!MyData);
+                }
 
-        console.log('update');
+            })
+            .catch(error => {
+                console.error('Error:', error);
 
-
+            });
 
     }
+    
 
+  
 
 
     return (
@@ -76,24 +91,33 @@ const MybookingList = ({ booking,setMyData, MyData}) => {
                     <div className="flex gap-2 text-center items-center justify-center" >{bookingDate}<span onClick={() => document.getElementById('my_modal_2').showModal()} className="text-xl  btn btn-xs rounded-sm "> <FaRegEdit /></span></div>
                 </td>
                 <td >
-                    <a onClick={() => handleDelete(_id)} className="btn btn-error btn-outline btn-xs">Cancel</a>
+                    <a onClick={() => handleDelete(_id, bookingID)} className="btn btn-error btn-outline btn-xs">Cancel</a>
                 </td>
             </tr>
-            {/* Open the modal using document.getElementById('ID').showModal() method */}
-            <dialog id="my_modal_2" className="modal bg-neutral-200 p-3">
-                <form className="flex flex-col p-4 gap-3" onSubmit={handleUpdateDate}>
+            {/* update date */}
+            <dialog id="my_modal_2" className="modal bg-neutral-400 p-3">
+               <div className='w-7/12 max-w-5xl modal-box'>
+               <form className="flex flex-col p-4 gap-3" onSubmit={handleUpdateDate}>
                     <h1 className="text-3xl font-bold text-center">Update Your Date</h1>
                     <label className="input input-bordered flex items-center gap-2">
                         <input type="date" name="date" className="grow" required />
                     </label>
                     <button type="submit" className="btn btn-square rounded-sm btn-block" >Update</button>
                 </form>
+               </div>
                 <form method="dialog" className="modal-backdrop ">
                     <button>close</button>
                 </form>
             </dialog>
+           
         </>
     );
 };
+
+MybookingList.propTypes = {
+    booking: PropTypes.object,
+    setMyData: PropTypes.func,
+    MyData: PropTypes.func
+}
 
 export default MybookingList;

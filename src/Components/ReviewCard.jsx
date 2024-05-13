@@ -1,7 +1,14 @@
 import PropTypes from 'prop-types';
+import Timestamp from 'react-timestamp';
 
-const ReviewCard = ({reviewPer}) => {
-    const {customer_name,image,rating,review_date,review}=reviewPer;
+const ReviewCard = ({ reviewPer }) => {
+    const { 
+        name,
+        image,
+        rating,
+        postDate,
+        comment }
+        = reviewPer;
     return (
         <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 bg-white text-gray-900">
             <div className="flex justify-between p-4">
@@ -10,8 +17,8 @@ const ReviewCard = ({reviewPer}) => {
                         <img src={image} alt="" className="object-cover w-12 h-12 rounded-full bg-gray-500" />
                     </div>
                     <div>
-                        <h4 className="font-bold">{customer_name}</h4>
-                        <span className="text-xs text-gray-400">{review_date}</span>
+                        <h4 className="font-bold">{name}</h4>
+                        <span className="text-xs text-gray-400"><Timestamp relative date={postDate} /></span>
                     </div>
                 </div>
                 <div className="flex items-center space-x-2 text-yellow-500">
@@ -22,14 +29,14 @@ const ReviewCard = ({reviewPer}) => {
                 </div>
             </div>
             <div className="p-4 space-y-2 text-sm text-gray-700">
-                <p>{review}</p>
+                <p>{comment}</p>
             </div>
         </div>
     );
 };
 
-ReviewCard.propTypes={
-    reviewPer:PropTypes.object
+ReviewCard.propTypes = {
+    reviewPer: PropTypes.object
 }
 
 export default ReviewCard;

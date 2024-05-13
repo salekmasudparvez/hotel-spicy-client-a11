@@ -9,6 +9,7 @@ import Login from "../Pages/Login/Login";
 import Singup from "../Pages/Singup/Singup";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import Mybooking from "../Pages/Mybooking/Mybooking";
+import Error from "../Pages/Error/Error";
 
 
 
@@ -16,6 +17,7 @@ const Routes = createBrowserRouter([
     {
       path: "/",
       element: <MainLayout></MainLayout>,
+      errorElement:<Error/>,
       children:[
         {
             path:'/',
@@ -28,7 +30,7 @@ const Routes = createBrowserRouter([
         },        
         {
             path:'/rooms/:id',
-            element: <PrivateRoutes><RoomDetails/></PrivateRoutes> ,
+            element: <RoomDetails/> ,
             loader:({params})=>fetch(`http://localhost:5000/rooms/${params.id}`)
         },        
         {

@@ -8,7 +8,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 const RoomCard = ({ room }) => {
-    const { RoomImages, title, PricePerNight, Features, Availability, _id } = room
+    const { RoomImages, title, PricePerNight, Features, Availability, _id,DiscountOffer } = room
     // const { user } = useAuth();
 
 
@@ -39,6 +39,7 @@ const RoomCard = ({ room }) => {
             </div>
 
             <div className="w-56 z-10 -mt-24 overflow-hidden bg-opacity-60 bg-white rounded-lg shadow-lg md:w-64 dark:bg-gray-800">
+            <div className="badge badge-neutral">neutral</div>
                 <h3 onClick={() => handleNavigate(_id)} className="py-2 font-bold tracking-wide text-center text-gray-800 uppercase dark:text-white">{title}</h3>
                 <h3 onClick={() => handleNavigate(_id)} className="py-2 bg-opacity-60 bg-neutral-300 space-x-2 font-medium tracking-wide text-center text-gray-800 text-sm dark:text-white">{Features.map((feature, idx) => <span className="bg-gray-300" key={idx}>{feature},</span>)}</h3>
 

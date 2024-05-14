@@ -1,7 +1,8 @@
-import {  signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,GithubAuthProvider, updateProfile } from "firebase/auth";
+import {  signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/Firebase";
 import axios from 'axios';
+import { PropTypes } from 'prop-types';
 
 
 export const AuthContext = createContext(null);
@@ -73,5 +74,8 @@ const AuthProvider = ({children}) => {
         </AuthContext.Provider>
     );
 };
+AuthProvider.propTypes={
+    children:PropTypes.element
+}
 
 export default AuthProvider;

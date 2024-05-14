@@ -5,6 +5,9 @@ import Newsletter from "../../Components/Newsletter";
 import Review from "../../Components/Review";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
+import MapPart from "../../Components/MapPart";
+
+
 
 const Home = () => {
     const navigateNew = useNavigate()
@@ -23,7 +26,7 @@ const Home = () => {
 
             <Banner></Banner>
             <FeturesRoom />
-            {/* <Map/> */}
+            <MapPart/>
             <Review />
             <Newsletter />
             {/* offers */}

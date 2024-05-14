@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import {  useState } from "react";
 import RoomCard from "./RoomCard";
 import { BsGrid3X3GapFill } from "react-icons/bs";

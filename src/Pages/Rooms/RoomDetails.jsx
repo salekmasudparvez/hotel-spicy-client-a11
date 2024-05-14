@@ -4,7 +4,6 @@ import useAuth from "../../Hook/useAuth";
 import toast from 'react-hot-toast';
 import axios from "axios";
 import ReviewPopup from "../Mybooking/ReviewPopup";
-import { useEffect } from "react";
 
 
 const RoomDetails = () => {

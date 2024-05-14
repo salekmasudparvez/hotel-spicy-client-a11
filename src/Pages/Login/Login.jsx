@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
+import { Helmet } from "react-helmet";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 
 const Login = () => {
@@ -8,15 +11,30 @@ const Login = () => {
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log('object',email,password);
+        // console.log('object',email,password);
         try {
             const result = await signInWithPassword(email,password)
+            // console.log(result);
+            const loggedUser = {email:result.user?.email}
+            if(result){
+                axios.post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
+                        .then(res => {
+                            console.log('token response', res.data);
+                        })
+             }
+             toast.success('Log in successful')
         } catch (error) {
-           console.log(error); 
+        //    console.log(error); 
+           toast.error('Invaild email or password') 
         }
     }
     return (
         <section className=" text-gray-900">
+             <Helmet>
+                <meta charSet="utf-8" />
+                <title>Log in now </title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <div className="container flex flex-col justify-center p-6 mx-auto sm:py-12 lg:py-24 lg:flex-row lg:justify-between">
                 <div className="flex items-center justify-center p-6 mt-8 lg:mt-0 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128">
                     <img src="https://i.postimg.cc/6q9fWn33/login.png" alt="" className="object-contain h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" />

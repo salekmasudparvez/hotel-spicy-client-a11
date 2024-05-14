@@ -3,6 +3,7 @@ import useAuth from "../../Hook/useAuth";
 import PulseLoader from "react-spinners/PulseLoader"
 import MybookingList from "./MybookingList";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 
 
 
@@ -27,6 +28,11 @@ const Mybooking = () => {
 
     return (
         <div className="overflow-x-auto md:px-14">
+             <Helmet>
+                <meta charSet="utf-8" />
+                <title>Hotel Spicy || My Booking</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <table className="table text-center">
                 {/* head */}
                 <thead >

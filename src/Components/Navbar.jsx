@@ -9,7 +9,7 @@ const Navbar = () => {
     const links = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/rooms'>Rooms</Link></li>
-        <li><Link to='/mybooking'>My Bookings</Link></li>
+        {user && <li><Link to='/mybooking'>My Bookings</Link></li>}
         <li><Link to='/aboutus'>About Us</Link></li>
         <li><Link to='/contact'>Contact</Link></li>
     </>

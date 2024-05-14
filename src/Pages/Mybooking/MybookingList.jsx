@@ -7,11 +7,21 @@ import useAuth from '../../Hook/useAuth';
 import toast from 'react-hot-toast';
 
 const MybookingList = ({ booking, setMyData, MyData }) => {
-    const {user}=useAuth()
-    const { image, bookTitle, bookingDate, bookingID, _id } = booking;
+    const { user } = useAuth()
+    const { image, bookTitle, bookingDate, bookingID, _id ,  currentDate, } = booking || {};
 
 
-    const handleDelete = async (id, bookingID) => {
+    const handleDelete = async (id, bookingID, currentDate) => {
+        const today = new Date()
+        const bookingDateConvert = new Date(currentDate)
+        const diffrentdays =bookingDateConvert.getDate() - today.getDate(); 
+        const diffrentMonths =bookingDateConvert.getMonth() - today.getMonth(); 
+        const diffrentYears =bookingDateConvert.getFullYear() - today.getFullYear(); 
+        if(diffrentdays> 1|| diffrentMonths!==0 || diffrentYears!==0){
+          toast.error('Cancellation date expired');
+          return
+        }
+
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -65,11 +75,6 @@ const MybookingList = ({ booking, setMyData, MyData }) => {
             });
 
     }
-    
-
-  
-
-
     return (
         <>
             <tr className="hover:bg-neutral-200">
@@ -91,25 +96,25 @@ const MybookingList = ({ booking, setMyData, MyData }) => {
                     <div className="flex gap-2 text-center items-center justify-center" >{bookingDate}<span onClick={() => document.getElementById('my_modal_2').showModal()} className="text-xl  btn btn-xs rounded-sm "> <FaRegEdit /></span></div>
                 </td>
                 <td >
-                    <a onClick={() => handleDelete(_id, bookingID)} className="btn btn-error btn-outline btn-xs">Cancel</a>
+                    <a onClick={() => handleDelete(_id, bookingID, currentDate)} className="btn btn-error btn-outline btn-xs">Cancel</a>
                 </td>
             </tr>
             {/* update date */}
             <dialog id="my_modal_2" className="modal bg-neutral-400 p-3">
-               <div className='w-7/12 max-w-5xl modal-box'>
-               <form className="flex flex-col p-4 gap-3" onSubmit={handleUpdateDate}>
-                    <h1 className="text-3xl font-bold text-center">Update Your Date</h1>
-                    <label className="input input-bordered flex items-center gap-2">
-                        <input type="date" name="date" className="grow" required />
-                    </label>
-                    <button type="submit" className="btn btn-square rounded-sm btn-block" >Update</button>
-                </form>
-               </div>
+                <div className='w-7/12 max-w-5xl modal-box'>
+                    <form className="flex flex-col p-4 gap-3" onSubmit={handleUpdateDate}>
+                        <h1 className="text-3xl font-bold text-center">Update Your Date</h1>
+                        <label className="input input-bordered flex items-center gap-2">
+                            <input type="date" name="date" className="grow" required />
+                        </label>
+                        <button type="submit" className="btn btn-square rounded-sm btn-block" >Update</button>
+                    </form>
+                </div>
                 <form method="dialog" className="modal-backdrop ">
                     <button>close</button>
                 </form>
             </dialog>
-           
+
         </>
     );
 };

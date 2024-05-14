@@ -1,8 +1,14 @@
+import { Helmet } from "react-helmet";
 
 
 const AboutUs = () => {
     return (
         <section className="py-6  text-gray-900">
+             <Helmet>
+                <meta charSet="utf-8" />
+                <title>Hotel Spicy || About us</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <div className="container flex flex-col items-center justify-center p-4 mx-auto sm:p-10">
                 <p className="p-2 text-sm font-medium tracking-wider text-center uppercase">Meet Our Team</p>
                 <h1 className="text-4xl font-bold leading-none text-center sm:text-5xl">The talented people behind the scenes</h1>

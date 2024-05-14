@@ -4,6 +4,7 @@ import useAuth from "../../Hook/useAuth";
 import toast from 'react-hot-toast';
 import axios from "axios";
 import ReviewPopup from "../Mybooking/ReviewPopup";
+import { useEffect } from "react";
 
 
 const RoomDetails = () => {
@@ -23,6 +24,7 @@ const RoomDetails = () => {
         const bookingDate = e.target.date.value;
         const bookTitle = title;
         const image = RoomImages;
+        const  currentDate = new Date()
         // console.log(email, name, date);
 
         const bookingID = _id;
@@ -34,7 +36,8 @@ const RoomDetails = () => {
             bookingID,
             Availability,
             bookTitle,
-            image
+            image,
+            currentDate,
 
         }
         try {
@@ -64,6 +67,7 @@ const RoomDetails = () => {
             rating,
             postDate,
             comment
+           
         }
        
         axios.post('http://localhost:5000/myreview',currentReview)
@@ -76,6 +80,7 @@ const RoomDetails = () => {
             console.error('Error:', error);
         });
     }
+   
    
 
 

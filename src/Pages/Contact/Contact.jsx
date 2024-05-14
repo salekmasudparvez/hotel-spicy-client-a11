@@ -1,8 +1,14 @@
+import { Helmet } from "react-helmet";
 
 
 const Contact = () => {
     return (
         <section className="py-6 md:py10 text-gray-900">
+             <Helmet>
+                <meta charSet="utf-8" />
+                <title>Hotel Spicy || Contact</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
                 <div className="py-6 md:py-0 md:px-6">
                     <h1 className="text-4xl font-bold">Get in touch</h1>

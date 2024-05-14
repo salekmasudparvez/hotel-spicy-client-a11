@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
+import { Helmet } from "react-helmet";
+import { toast } from 'react-hot-toast';
+import axios from "axios";
 
 const Singup = () => {
     const {creatUserGoogle,creatUserPassword,updateUserProfile,setUser} = useAuth();
@@ -14,13 +17,29 @@ const Singup = () => {
             const result = await creatUserPassword(email,password)
              await updateUserProfile(name,photo);
              setUser({...result?.user,photoURL: photo, displayName: name })
+             toast.success("Sing up successful")
+            //  console.log(result.user.email);
+            const loggedUser = {email:result.user?.email}
+             if(result){
+                axios.post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
+                        .then(res => {
+                            console.log('token response', res.data);
+                        })
+             }
+             
         } catch (error) {
-           console.log(error); 
+           console.log(error);
+           toast.error('Invaild email or password') 
         }
 
     }
     return (
         <div className="bg-[url('https://clipart-library.com/new_gallery/9-92768_grass-png-hd-nature-clipart-transparent-background.png')] bg-no-repeat md:py-14 py-6 bg-cover bg-center">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Sing up now </title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
 
             <div className="w-full max-w-md mx-auto p-4 rounded-md shadow sm:p-8 bg-gray-900 bg-opacity-60  text-gray-100">
                 <form onSubmit={handleSingup} className="space-y-4 py-4">

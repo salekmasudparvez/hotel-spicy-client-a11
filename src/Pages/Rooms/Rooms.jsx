@@ -1,11 +1,12 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import RoomCard from "./RoomCard";
 import { BsGrid3X3GapFill } from "react-icons/bs";
 import { FaArrowAltCircleUp, FaArrowCircleDown, FaBars, FaFilter } from "react-icons/fa";
 import RoomsList from "../../Components/RoomsList";
 import { useLoaderData } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet";
 
 
 const Rooms = () => {
@@ -50,6 +51,11 @@ const Rooms = () => {
 
     return (
         <div className="md:mx-10 mx-2 space-y-4">
+              <Helmet>
+                <meta charSet="utf-8" />
+                <title>Hotel Spicy || Rooms</title>
+                <link rel="canonical" href="http://mysite.com/example" />
+            </Helmet>
             <div className="md:py-14 py-6 space-y-3 text-center">
                 <h1 className="text-5xl font-bold ">Find Rooms</h1>
                 <p>You can find a room easily with price range and easy to book .So don&lsquo;t wait.</p>

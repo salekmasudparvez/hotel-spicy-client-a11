@@ -1,6 +1,7 @@
 import {  signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,GithubAuthProvider, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../Firebase/Firebase";
+import axios from 'axios';
 
 
 export const AuthContext = createContext(null);
@@ -11,7 +12,16 @@ const AuthProvider = ({children}) => {
     const providerGoogle = new GoogleAuthProvider();
     const creatUserGoogle =()=>{
         setLoading(true)
-       return signInWithPopup(auth,providerGoogle)
+       return signInWithPopup(auth,providerGoogle).then(result=>{
+        console.log(result);
+        const loggedUser = {email:result.user?.email}
+        if(result){
+            axios.post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
+                    .then(res => {
+                        console.log('token response', res.data);
+                    })
+         }
+    })
     }
     const creatUserPassword = ( email, password)=>{
         setLoading(true)
@@ -25,17 +35,28 @@ const AuthProvider = ({children}) => {
     
   
     const LogOutUser = ()=>{
+
         setLoading(true)
         return signOut(auth)
     }
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth, currentUser=>{
             setUser(currentUser);
+            const userEmail = currentUser?.email || user?.email;
+            const loggedUser = { email: userEmail };
             setLoading(false)
+           if(!currentUser){
+                axios.post('http://localhost:5000/logout', loggedUser, {
+                    withCredentials: true
+                })
+                    .then(res => {
+                        console.log(res.data);
+                    })
+            }
            
         })
         return ()=> unsubscribe()
-    },[]);
+    },[user?.email]);
     const updateUserProfile = (name, photo) => {
         return updateProfile(auth.currentUser, {
           displayName: name,

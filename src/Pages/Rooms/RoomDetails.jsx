@@ -12,7 +12,7 @@ const RoomDetails = () => {
     const { user } = useAuth();
     const  navigateList = useNavigate()
   
-    const { RoomImages, title, description, PricePerNight, Features, Availability, RoomSize, _id } = data
+    const { RoomImages, title, description, PricePerNight, Features, Availability, RoomSize, DiscountOffer,_id } = data
 
 
     const handleMyBooking = async e => {
@@ -93,7 +93,9 @@ const RoomDetails = () => {
                         <h3 className="text-2xl font-semibold sm:text-4xl">{title}</h3>
                         <p>{description}</p>
                         <span className="text-xs text-gray-400">Sit Availability :{Availability ? "Yes" : "No"}</span>
-                        <div className="flex justify-between"><p> <span className="font-medium">Price Per Night</span> :{PricePerNight} $</p><p> <span className="font-medium">Room Size</span> :{RoomSize}</p> </div>
+                        <div className="flex justify-between"><div> <span className="font-medium">Price Per Night</span> :
+                        {DiscountOffer ?<p className="font-bold text-gray-800 dark:text-gray-200"><span className='line-through'>${PricePerNight}</span> <span>${ PricePerNight-PricePerNight*(DiscountOffer/100)}</span></p>
+                    :<span className="font-bold text-gray-800 dark:text-gray-200">${PricePerNight}</span>} </div><p> <span className="font-medium">Room Size</span> :{RoomSize}</p> </div>
                         <div className="space-x-4">Fetures:{Features.map((feture, idx) => <span key={idx}>{feture},</span>)}</div>
                         {user? <form onSubmit={handleMyBooking}>
                             <label className="input input-bordered flex items-center gap-2">

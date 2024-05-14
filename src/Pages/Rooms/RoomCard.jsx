@@ -4,11 +4,16 @@ import { BsCheckCircle, BsExclamationTriangle } from 'react-icons/bs';
 import { FaLuggageCart, FaRegCommentAlt } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+AOS.init();
 
 
 
-const RoomCard = ({ room }) => {
-    const { RoomImages, title, PricePerNight, Features, Availability, _id, DiscountOffer } = room
+
+const RoomCard = ({ room,idx}) => {
+    const { RoomImages, title, PricePerNight, Features, Availability, _id, DiscountOffer ,reviewCount} = room
+   
     // const { user } = useAuth();
 
 
@@ -20,7 +25,7 @@ const RoomCard = ({ room }) => {
 
 
     return (
-        <div className="flex flex-col w-fit border items-center shadow-2xl justify-center rounded-2xl max-w-sm mx-auto">
+        <div data-aos="flip-up"  data-aos-delay={`${idx*150}`} data-aos-duration="1000" className="flex flex-col w-fit border items-center shadow-2xl justify-center rounded-2xl max-w-sm mx-auto">
             <div onClick={() => handleNavigate(_id)} className="relative bg-transparent  rounded-2xl z-0]">
                 <div className="w-[250px] md:w-[300px] md:h-[300px] h-[250px] object-cover"><img className=" w-[250px] md:w-[300px] md:h-[300px] h-[250px] rounded-2xl " src={RoomImages} /></div>
                 {Availability ?
@@ -33,7 +38,7 @@ const RoomCard = ({ room }) => {
                 }
                 <div>
                     <div className=" absolute top-0  right-0 text-white badge badge-info gap-2">
-                        <FaRegCommentAlt /> Reviews({1})
+                        <FaRegCommentAlt /> Reviews({reviewCount})
                     </div>
                 </div>
             </div>
@@ -57,6 +62,7 @@ const RoomCard = ({ room }) => {
     );
 };
 RoomCard.propTypes = {
-    room: PropTypes.object
+    room: PropTypes.object,
+    idx:PropTypes.number,
 }
 export default RoomCard;

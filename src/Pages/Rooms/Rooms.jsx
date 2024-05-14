@@ -17,6 +17,7 @@ const Rooms = () => {
     const numberOfPages = Math.ceil(count / itemPerPage);
     const pages = [...Array(numberOfPages).keys()];
     const [currentPage, setCurrentPage] = useState(0);
+    const[filterPrice , SetFilterPrice]=useState(1);
 
     const handlePerPage = (e) => {
         const customItemPerPage = parseInt(e.target.value);
@@ -37,9 +38,9 @@ const Rooms = () => {
     }
 
     const { isPending, data: roomsdata } = useQuery({
-        queryKey: ['roomsdata',currentPage,itemPerPage],
+        queryKey: ['roomsdata',currentPage,itemPerPage,filterPrice],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/rooms?page=${currentPage}&size=${itemPerPage}`)
+            const res = await fetch(`http://localhost:5000/rooms?page=${currentPage}&size=${itemPerPage}&sort=${filterPrice}`)
             return res.json()
         }
     })
@@ -65,8 +66,8 @@ const Rooms = () => {
                     <details className="dropdown rounded-sm bg-neutral-200 ">
                         <summary className="m-1 btn bg-transparent"><FaFilter />Price</summary>
                         <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                            <li className="border"><a>Price low to hight <FaArrowAltCircleUp /></a></li>
-                            <li className="border"><a>Price hight to low <FaArrowCircleDown /></a></li>
+                            <li onClick={()=>SetFilterPrice(1)} className="border"><a>Price low to hight <FaArrowAltCircleUp /></a></li>
+                            <li onClick={()=>SetFilterPrice(-1)} className="border"><a>Price hight to low <FaArrowCircleDown /></a></li>
                         </ul>
                     </details>
                 </div>
@@ -81,7 +82,7 @@ const Rooms = () => {
             </div>
             {layout === 'grid' ?
                 <div className="grid gap-4 place-items-center md:grid-cols-2 lg:grid-cols-3 grid-cols-1" >
-                    {roomsdata?.map((room, idx) => <RoomCard room={room} key={idx}></RoomCard>)}
+                    {roomsdata?.map((room, idx) => <RoomCard room={room} idx={idx} key={idx}></RoomCard>)}
                 </div>
                 :
                 <div className="overflow-x-auto">

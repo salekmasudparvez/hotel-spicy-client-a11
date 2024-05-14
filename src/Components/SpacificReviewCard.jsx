@@ -1,20 +1,20 @@
+
 import PropTypes from 'prop-types';
 import Timestamp from 'react-timestamp';
 import AOS from 'aos';
 import 'aos/dist/aos.css'; 
 AOS.init();
 
-
-const ReviewCard = ({ reviewPer }) => {
+const SpacificReviewCard = ({perRev}) => {
     const { 
         name,
         image,
         rating,
         postDate,
         comment }
-        = reviewPer;
+        = perRev||{};
     return (
-        <div data-aos="flip-left" data-aos-duration="1000" className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 bg-white text-gray-900">
+         <div data-aos="flip-left" data-aos-duration="1000" className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 bg-white text-gray-900">
             <div className="flex justify-between p-4">
                 <div className="flex space-x-4">
                     <div>
@@ -39,8 +39,7 @@ const ReviewCard = ({ reviewPer }) => {
     );
 };
 
-ReviewCard.propTypes = {
-    reviewPer: PropTypes.object
+SpacificReviewCard.propTypes = {
+    perRev: PropTypes.object
 }
-
-export default ReviewCard;
+export default SpacificReviewCard;

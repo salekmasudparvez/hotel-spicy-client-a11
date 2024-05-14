@@ -4,7 +4,7 @@ const Newsletter = () => {
     return (
         <section>
 
-            <div className="container mx-auto">
+            <div data-aos="zoom-out-up"  data-aos-duration="1000" className="container mx-auto">
                 <div className="items-center lg:flex">
                     <div className="w-full lg:w-1/2">
                         <div className="lg:max-w-lg">

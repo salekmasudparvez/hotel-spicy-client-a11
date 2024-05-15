@@ -14,7 +14,7 @@ const ReviewCard = ({ reviewPer }) => {
         comment }
         = reviewPer;
     return (
-        <div data-aos="flip-left" data-aos-duration="1000" className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 bg-white text-gray-900">
+        <div data-aos="flip-left" data-aos-duration="1000" className="carousel-item hover:shadow-xl container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md divide-gray-700 bg-white text-gray-900">
             <div className="flex justify-between p-4">
                 <div className="flex space-x-4">
                     <div>

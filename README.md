@@ -10,4 +10,6 @@ Currently, two official plugins are available:
 - Here you will find some discount on spcial occation
 - You can give feedback and contact with us
 
+ assignment_category_0004
+
 [Live-Link](https://hotel-spicy.netlify.app/) 

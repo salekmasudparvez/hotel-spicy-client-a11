@@ -1,11 +1,11 @@
 import { FaLuggageCart } from "react-icons/fa";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
-import toast from 'react-hot-toast';
 import axios from "axios";
 import ReviewPopup from "../Mybooking/ReviewPopup";
 import SpacificReviewCard from "../../Components/SpacificReviewCard";
 import { useEffect, useState } from "react";
+import Swal from 'sweetalert2'
 
 
 const RoomDetails = () => {
@@ -16,7 +16,7 @@ const RoomDetails = () => {
   
     const { RoomImages, title, description, PricePerNight, Features, Availability, RoomSize, DiscountOffer, _id } = data;
 
-    const handleMyBooking = async e => {
+    const handleMyBooking =  e => {
         e.preventDefault()
         // if (user?.email === buyer?.email){return toast.error('Action not permitted!')}
 
@@ -40,23 +40,23 @@ const RoomDetails = () => {
             currentDate,
 
         }
-        try {
-            const { data } = await axios.post('https://hotel-server-kappa.vercel.app/mybooking', newBooking)
-            if (data) {
-                // console.log(data)
-                axios.patch(`https://hotel-server-kappa.vercel.app/rooms/${_id}`, { Availability: false })
-                toast.success('Book Placed Successfully!')
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Book it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                 axios.post('https://hotel-server-kappa.vercel.app/mybooking', newBooking)
+                 axios.patch(`https://hotel-server-kappa.vercel.app/rooms/${_id}`, { Availability: false })
+                 document.getElementById('my_modal_1').showModal();
+                console.log(result.isConfirmed);
+               
             }
-
-
-            document.getElementById('my_modal_1').showModal();
-
-
-        } catch (errors) {
-            // console.log(errors);
-            toast.error('Somthing is going wrong')
-            e.target.reset()
-        }
+          });
     }
     //reviews 
     const handleReview = (e) => {

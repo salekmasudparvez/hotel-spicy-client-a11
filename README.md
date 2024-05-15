@@ -1,8 +1,13 @@
-# React + Vite
+# hotel-Spicy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hotel Spicy offers a delightful stay experience blending comfort and affordability. With tastefully designed rooms, modern amenities, and attentive service, we ensure every guest enjoys a memorable stay. Conveniently located amidst vibrant surroundings, our hotel is the perfect choice for both leisure and business travelers seeking comfort and convenience.
 
 Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Tourist can easy find out website
+- You use map for find our hotel
+- Easy to book a room 
+- Here you will find some discount on spcial occation
+- You can give feedback and contact with us
+
+[Live-Link](https://hotel-spicy.netlify.app/) 

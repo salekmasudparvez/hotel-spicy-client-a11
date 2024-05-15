@@ -23,10 +23,8 @@ const Review = () => {
     return (
         <div>
             <div><h1 data-aos="zoom-in"  data-aos-duration="1000" className="text-4xl font-semibold text-neutral-600 text-center py-10">WHAT CUSTOMERS SAY</h1></div>
-            {/* <div className="grid gap-4 place-items-center md:grid-cols-2 lg:grid-cols-3 grid-cols-1">
-                {reviews.map((reviewPer,idx)=><ReviewCard key={idx} reviewPer={reviewPer}></ReviewCard>)}
-            </div> */}
-            <div className="carousel space-x-3 rounded-box">
+          
+            <div className="carousel space-x-3 rounded-box w-full">
                 {reviews.map((reviewPer,idx)=><ReviewCard key={idx} reviewPer={reviewPer}></ReviewCard>)}
             </div>
         </div>

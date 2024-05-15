@@ -17,9 +17,9 @@ const AuthProvider = ({children}) => {
         console.log(result);
         const loggedUser = {email:result.user?.email}
         if(result){
-            axios.post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
+            axios.post('https://hotel-server-kappa.vercel.app/jwt', loggedUser, { withCredentials: true })
                     .then(res => {
-                        console.log('token response', res.data);
+                        // console.log('token response', res.data);
                     })
          }
     })
@@ -47,11 +47,11 @@ const AuthProvider = ({children}) => {
             const loggedUser = { email: userEmail };
             setLoading(false)
            if(!currentUser){
-                axios.post('http://localhost:5000/logout', loggedUser, {
+                axios.post('https://hotel-server-kappa.vercel.app/logout', loggedUser, {
                     withCredentials: true
                 })
                     .then(res => {
-                        console.log(res.data);
+                        // console.log(res.data);
                     })
             }
            

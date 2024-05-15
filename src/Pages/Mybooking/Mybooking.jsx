@@ -14,11 +14,11 @@ const Mybooking = () => {
     const { isPending, data: mybooking } = useQuery({
         queryKey: ['roomsdata', user?.email,MyData],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/mybooking?email=${user?.email}`)
+            const res = await fetch(`https://hotel-server-kappa.vercel.app/mybooking?email=${user?.email}`)
             return res.json()
         }
     })
-    
+   
     
     if (isPending) {
         return <div className="flex justify-center items-center h-[calc(100vh-300px)] w-full border">
@@ -46,7 +46,7 @@ const Mybooking = () => {
                 </thead>
                 <tbody >
                     {/* row 1 */}
-                    {mybooking?.map((booking, idx) => <MybookingList setMyData={setMyData} MyData={MyData} booking={booking} key={idx}></MybookingList>)}
+                    {mybooking && mybooking?.map((booking, idx) => <MybookingList setMyData={setMyData} MyData={MyData} booking={booking} key={idx}></MybookingList>)}
                 </tbody>
                
             </table>

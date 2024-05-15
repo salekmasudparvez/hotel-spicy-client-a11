@@ -31,7 +31,7 @@ const MybookingList = ({ booking, setMyData, MyData }) => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:5000/mybooking/${id}`)
+                axios.delete(`https://hotel-server-kappa.vercel.app/mybooking/${id}`)
                     .then(response => {
                         const data = response.data;
                         if (data.deletedCount > 0) {
@@ -40,13 +40,13 @@ const MybookingList = ({ booking, setMyData, MyData }) => {
                                 text: "Your file has been Cancelled.",
                                 icon: "success"
                             });
-                            axios.patch(`http://localhost:5000/updateTrue/${bookingID}`, { Availability: true })
+                            axios.patch(`https://hotel-server-kappa.vercel.app/updateTrue/${bookingID}`, { Availability: true })
                             setMyData(!MyData);
 
                         }
                     })
                     .catch(error => {
-                        console.error('Error:', error);
+                        // console.error('Error:', error);
                     });
             }
         });
@@ -58,7 +58,7 @@ const MybookingList = ({ booking, setMyData, MyData }) => {
         e.preventDefault();
         const id = _id;
         const updatedDate = e.target.date.value;
-        axios.patch(`http://localhost:5000/updateDate/${id}`, { updatedDate })
+        axios.patch(`https://hotel-server-kappa.vercel.app/updateDate/${id}`, { updatedDate })
             .then(response => {
                 const data = response.data;
                 if (data.modifiedCount > 0) {
@@ -68,7 +68,7 @@ const MybookingList = ({ booking, setMyData, MyData }) => {
 
             })
             .catch(error => {
-                console.error('Error:', error);
+                // console.error('Error:', error);
 
             });
 

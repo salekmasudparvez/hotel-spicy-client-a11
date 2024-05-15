@@ -11,12 +11,14 @@ const Review = () => {
 
     useEffect(() => {
     const getData = async () => {
-      const { data } = await axios.get('http://localhost:5000/review')
+      const { data } = await axios.get('https://hotel-server-kappa.vercel.app/review')
       setReviews(data)
     }
     getData()
   }, [])
+
 //   console.log(reviews);
+
 
     return (
         <div>

@@ -27,12 +27,12 @@ const Routes = createBrowserRouter([
         {
             path:'/rooms',
             element:<Rooms/>,
-            loader:()=>fetch('http://localhost:5000/roomsCount')
+            loader:()=>fetch('https://hotel-server-kappa.vercel.app/roomsCount')
         },        
         {
             path:'/rooms/:id',
             element: <RoomDetails/> ,
-            loader:({params})=>fetch(`http://localhost:5000/rooms/${params.id}`)
+            loader:({params})=>fetch(`https://hotel-server-kappa.vercel.app/rooms/${params.id}`)
         },        
         {
             path:'/contact',

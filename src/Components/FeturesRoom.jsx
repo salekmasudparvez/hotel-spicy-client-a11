@@ -11,7 +11,7 @@ const FeturesRoom = () => {
     const { isPending, data:fetures } = useQuery({
         queryKey: ['fetures'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/fetures')
+            const res = await fetch('https://hotel-server-kappa.vercel.app/fetures')
             return res.json()
         }
     })

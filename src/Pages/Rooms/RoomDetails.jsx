@@ -4,21 +4,17 @@ import useAuth from "../../Hook/useAuth";
 import toast from 'react-hot-toast';
 import axios from "axios";
 import ReviewPopup from "../Mybooking/ReviewPopup";
-import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
 import SpacificReviewCard from "../../Components/SpacificReviewCard";
+import { useEffect, useState } from "react";
 
 
 const RoomDetails = () => {
     const data = useLoaderData();
     const { user } = useAuth();
     const navigateList = useNavigate();
-    const [rev, setRev]=useState([])
-
-    const { RoomImages, title, description, PricePerNight, Features, Availability, RoomSize, DiscountOffer, _id, reviewCount } = data;
-
-   
-   
+    const [reviews, setReviews] = useState([]);
+  
+    const { RoomImages, title, description, PricePerNight, Features, Availability, RoomSize, DiscountOffer, _id } = data;
 
     const handleMyBooking = async e => {
         e.preventDefault()
@@ -45,10 +41,10 @@ const RoomDetails = () => {
 
         }
         try {
-            const { data } = await axios.post('http://localhost:5000/mybooking', newBooking)
+            const { data } = await axios.post('https://hotel-server-kappa.vercel.app/mybooking', newBooking)
             if (data) {
-                console.log(data)
-                axios.patch(`http://localhost:5000/rooms/${_id}`, { Availability: false })
+                // console.log(data)
+                axios.patch(`https://hotel-server-kappa.vercel.app/rooms/${_id}`, { Availability: false })
                 toast.success('Book Placed Successfully!')
             }
 
@@ -57,7 +53,7 @@ const RoomDetails = () => {
 
 
         } catch (errors) {
-            console.log(errors);
+            // console.log(errors);
             toast.error('Somthing is going wrong')
             e.target.reset()
         }
@@ -71,8 +67,6 @@ const RoomDetails = () => {
         const image = user?.photoURL || "https://vectorified.com/images/unknown-person-icon-12.png";
         const postDate = new Date()
         const BookingIdForReview = _id;
-        const reviewNum = parseInt(reviewCount)
-        const updateReviewCount = reviewNum+1
         const currentReview = {
             name,
             image,
@@ -82,37 +76,24 @@ const RoomDetails = () => {
             BookingIdForReview,
         }
 
-        axios.post('http://localhost:5000/myreview', currentReview)
+        axios.post('https://hotel-server-kappa.vercel.app/myreview', currentReview)
             .then(response => {
                 const data = response.data;
-                if(data){
-                    axios.patch(`http://localhost:5000/rooms/updateReview/${BookingIdForReview}`,{updateReviewCount})
-                }
-
-
-                navigateList(`/rooms`)
+                if(data){    
+                    navigateList(`/rooms`)}
             })
             .catch(error => {
-                console.error('Error:', error);
+                // console.error('Error:', error);
             });
     }
-    const { isPending, data: singlereview } = useQuery({
-        queryKey: ['singlereview'],
-        queryFn: async () => {
-            const res = await fetch('http://localhost:5000/review')
-            return res.json()
-        }
-    })
-    useEffect(()=>{
-       const spacificReviews =singlereview.filter(spacificReview=>spacificReview.BookingIdForReview===_id)
-       setRev(spacificReviews)
-    },[singlereview,_id])
-    
-    if (isPending) {
-        return <div className="w-full flex justify-center items-center my-10">
-            <span className="loading loading-spinner loading-lg text-accent"></span>
-        </div>
-    }
+    useEffect(() => {
+        fetch('https://hotel-server-kappa.vercel.app/review')
+        .then(res=>res.json())
+        .then(data=>{
+          const spacificData = data.filter(dat=>dat.BookingIdForReview===_id);
+          setReviews(spacificData)
+        })
+     }, [_id])
     return (
         <section className=" text-gray-900">
             <div className="container max-w-6xl p-6 mx-auto space-y-6 sm:space-y-12">
@@ -155,9 +136,9 @@ const RoomDetails = () => {
             {/* review of per card */}
             <div className="py-6">
                 <div><h1 className="text-4xl font-bold text-center py-5">Review of this room</h1></div>
-                {rev.length>1 ?
+                {reviews.length>=1 ?
                 <div className="grid py-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
-                {rev.map((perRev,idx)=><SpacificReviewCard key={idx} perRev={perRev}></SpacificReviewCard>)}
+                {reviews.map((perRev,idx)=><SpacificReviewCard key={idx} perRev={perRev}></SpacificReviewCard>)}
                 </div>:
                 <div className="h-32 flex justify-center items-center bg-white"><h1 className="text-4xl text-bold text-gray-400 text-center">No reviews Yet</h1></div>
                 }

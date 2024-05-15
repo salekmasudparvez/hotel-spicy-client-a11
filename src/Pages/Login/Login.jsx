@@ -17,7 +17,7 @@ const Login = () => {
             // console.log(result);
             const loggedUser = {email:result.user?.email}
             if(result){
-                axios.post('http://localhost:5000/jwt', loggedUser, { withCredentials: true })
+                axios.post('https://hotel-server-kappa.vercel.app/jwt', loggedUser, { withCredentials: true })
                         .then(res => {
                             console.log('token response', res.data);
                         })

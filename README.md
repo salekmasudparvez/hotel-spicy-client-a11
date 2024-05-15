@@ -1,4 +1,4 @@
-# hotel-Spicy
+# Hotel-Spicy
 
 Hotel Spicy offers a delightful stay experience blending comfort and affordability. With tastefully designed rooms, modern amenities, and attentive service, we ensure every guest enjoys a memorable stay. Conveniently located amidst vibrant surroundings, our hotel is the perfect choice for both leisure and business travelers seeking comfort and convenience.
 

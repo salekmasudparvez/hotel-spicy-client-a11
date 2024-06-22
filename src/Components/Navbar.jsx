@@ -14,7 +14,7 @@ const Navbar = () => {
         <li><Link to='/contact'>Contact</Link></li>
     </>
     return (
-        <nav className='border-b border-b-neutral-300'>
+        <div className='border-b w-full border-b-neutral-300'>
             <div className="navbar max-w-6xl mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -50,7 +50,7 @@ const Navbar = () => {
                         </>}
                 </div>
             </div>
-        </nav>
+        </div>
     );
 };
 

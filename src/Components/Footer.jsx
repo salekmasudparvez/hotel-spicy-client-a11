@@ -2,7 +2,7 @@ import Logo from '../assets/logo/logo-Final.png'
 
 const Footer = () => {
     return (
-        <footer className="footer p-10 bg-[#0A1121] text-white">
+        <footer className="footer w-full p-10 bg-[#0A1121] text-white">
             <aside>
                   <img className='w-[150px] bg-gray-200 object-contain rounded-badge bg-opacity-60' src={Logo} alt="Trivago" />
                 <p>Hotel Spicy Industries Ltd.<br />Providing reliable tech since 1992</p>

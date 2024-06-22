@@ -4,9 +4,9 @@ const Newsletter = () => {
     return (
         <section>
 
-            <div data-aos="zoom-out-up"  data-aos-duration="1000" className="container mx-auto">
-                <div className="items-center lg:flex">
-                    <div className="w-full lg:w-1/2">
+            <div className="py-10 mx-auto">
+                <div className="items-center space-y-3 lg:flex">
+                    <div className="w-full lg:w-1/2 text-left md:px-10 px-3" data-aos="flip-left"  data-aos-duration="1000">
                         <div className="lg:max-w-lg">
                             <h1 className="text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl">Subscribe To The <span className="text-blue-500">Newsletter</span></h1>
 
@@ -22,8 +22,8 @@ const Newsletter = () => {
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-center w-full mt-6 lg:mt-0 lg:w-1/2">
-                        <img className="w-full h-full max-w-md " src="https://merakiui.com/images/components/Email-campaign-bro.svg" alt="email illustration vector art" />
+                    <div data-aos="flip-right"  data-aos-duration="1000" className="flex items-center justify-center w-full  lg:w-1/2">
+                        <img className="w-full h-full " src="https://i.ibb.co/qd042Mx/mobile-login-concept-illustration-114360-83.jpg" alt="email illustration vector art" />
                     </div>
                 </div>
             </div>

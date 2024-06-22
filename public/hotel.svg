@@ -2,7 +2,7 @@
 
 <defs>
 </defs>
-<g style="stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
+<g style="stroke: none; strokeWidth: 0; strokeDasharray: none; strokeLinecap: butt; strokeLinejoin: miter; strokeMterlimit: 10; fill: none; fillRule: nonzero; opacity: 1;" transform="translate(1.4065934065934016 1.4065934065934016) scale(2.81 2.81)" >
 	<path d="M 78.041 23.05 H 11.959 V 5.962 C 11.959 3.221 14.18 1 16.92 1 H 73.08 c 2.74 0 4.962 2.221 4.962 4.962 V 23.05 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(240,199,100); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />
 	<rect x="7.86" y="31.48" rx="0" ry="0" width="74.28" height="49.08" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(233,92,102); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) "/>
 	<path d="M 86.577 89 H 3.423 v -4.817 c 0 -1.998 1.62 -3.618 3.618 -3.618 h 75.918 c 1.998 0 3.618 1.62 3.618 3.618 V 89 z" style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: rgb(211,178,178); fill-rule: nonzero; opacity: 1;" transform=" matrix(1 0 0 1 0 0) " stroke-linecap="round" />

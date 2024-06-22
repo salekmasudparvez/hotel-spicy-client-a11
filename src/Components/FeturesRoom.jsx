@@ -24,7 +24,7 @@ const FeturesRoom = () => {
 
 
     return (
-        <section>
+        <section className="w-full">
             <div className="container px-6 py-10 mx-auto">
                 <h1 data-aos="zoom-in"  data-aos-duration="1000" className="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">explore our <br /> awesome <span className="text-blue-500">Fetures</span></h1>
 

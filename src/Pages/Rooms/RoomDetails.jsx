@@ -100,9 +100,7 @@ const RoomDetails = () => {
                 if(data){    
                     navigateList(`/rooms`)}
             })
-            .catch(error => {
-                // console.error('Error:', error);
-            });
+            
     }
     const{isLoading:reviewLoading,data:reviews}=useQuery({
         queryKey:['reviews',_id],

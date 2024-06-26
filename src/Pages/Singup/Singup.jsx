@@ -3,35 +3,39 @@ import useAuth from "../../Hook/useAuth";
 import { Helmet } from "react-helmet";
 import { toast } from 'react-hot-toast';
 import axios from "axios";
+import { useState } from "react";
 
 const Singup = () => {
     const {creatUserGoogle,creatUserPassword,updateUserProfile,setUser} = useAuth();
+    const [loading,setLoading]=useState(false)
     const handleSingup=async(e)=>{
         e.preventDefault();
+        setLoading(true)
         const email = e.target.email.value;
         const name = e.target.name.value;
-        const photo = e.target.photo.value;
+        const photo = "https://i.ibb.co/t3n0XR7/240.jpg";
         const password = e.target.password.value;
         try {
             const result = await creatUserPassword(email,password)
+            console.log(photo)
              await updateUserProfile(name,photo);
-             setUser({...result?.user,photoURL: photo, displayName: name })
              toast.success("Sing up successful")
             //  console.log(result.user.email);
             const loggedUser = {email:result.user?.email}
-             if(result){
-                axios.post('https://hotel-server-kappa.vercel.app/jwt', loggedUser, { withCredentials: true })
-                        .then(res => {
-                            // console.log('token response', res.data);
-                        })
-             }
+             
+             setLoading(false)
              
         } catch (error) {
         //    console.log(error);
            toast.error('Invaild email or password') 
+           setLoading(false)
         }
 
     }
+    if(loading){
+        return ( <div className="min-h-screen w-full flex justify-center items-center">
+           <span className="loading loading-spinner loading-lg"></span></div>)
+     }
     return (
         <div className="bg-[url('https://clipart-library.com/new_gallery/9-92768_grass-png-hd-nature-clipart-transparent-background.png')] bg-no-repeat md:py-14 py-6 bg-cover bg-center">
             <Helmet>
@@ -47,10 +51,7 @@ const Singup = () => {
                             <label htmlFor="name" className="block text-sm">Name</label>
                             <input type="name" name="name" id="name" placeholder="Enter your name" className="w-full px-3 py-2 border rounded-md border-gray-700  text-gray-900 focus:border-violet-400" />
                         </div>
-                        <div className="space-y-2">
-                            <label htmlFor="photo" className="block text-sm">PhotoURL</label>
-                            <input type="photo" name="photo" id="photo" placeholder="Enter your photo" className="w-full px-3 py-2 border rounded-md border-gray-700  text-gray-900 focus:border-violet-400" />
-                        </div>
+                        
                         <div className="space-y-2">
                             <label htmlFor="email" className="block text-sm">Email address</label>
                             <input type="email" name="email" id="email" placeholder="Enter your email" className="w-full px-3 py-2 border rounded-md border-gray-700  text-gray-900 focus:border-violet-400" />

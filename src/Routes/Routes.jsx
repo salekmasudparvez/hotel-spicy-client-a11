@@ -10,6 +10,12 @@ import Singup from "../Pages/Singup/Singup";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import Mybooking from "../Pages/Mybooking/Mybooking";
 import Error from "../Pages/Error/Error";
+import DashboardLayout from "../Layout/DashboardLayout";
+import Profile from "../Pages/Profile/Profile";
+import AllUsers from "../Pages/Dashboard/Host/AllUsers/Allusers";
+import Allrooms from "../Pages/Dashboard/Host/Alrooms/Allrooms";
+import Balance from "../Pages/Dashboard/Host/Balance/Balance";
+import HostRoutes from "../PrivateRoutes/HostRoutes";
 
 
 
@@ -23,6 +29,10 @@ const Routes = createBrowserRouter([
         {
             path:'/',
             element:<Home/>
+        },
+        {
+            path:'/profile',
+            element:<Profile/>
         },
         {
             path:'/rooms',
@@ -57,6 +67,25 @@ const Routes = createBrowserRouter([
         }
       ]
     },
+    {
+        path:'/dashboard',
+        element:<DashboardLayout/>,
+        children:[
+            // host
+            {
+                path:'/dashboard',
+                element:<HostRoutes><AllUsers/></HostRoutes>
+            },
+            {
+                path:'/dashboard/allrooms',
+                element:<HostRoutes><Allrooms/></HostRoutes>
+            },
+            {
+                path:'/dashboard/balance',
+                element:<HostRoutes><Balance/></HostRoutes>
+            },
+        ]
+    }
   ]);
 
 export default Routes;

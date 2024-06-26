@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom';
 import Logo from '../assets/logo/logo-Final.png'
 import { FaBars } from 'react-icons/fa';
 import useAuth from '../Hook/useAuth';
+import useRole from '../Hook/useRole';
 const Navbar = () => {
-    const {user,LogOutUser}=useAuth();
-    
+    const { user, LogOutUser,loading } = useAuth();
+    const [role,isLoading]=useRole();
+
 
     const links = <>
         <li><Link to='/'>Home</Link></li>
@@ -32,13 +34,17 @@ const Navbar = () => {
                         {links}
                     </ul>
                 </div>
-                <div className="navbar-end gap-3 ">
+                <div className="navbar-end gap-3">
                     {user ?
                         <>
-                            <div className="avatar online">
-                                <div className="w-14 rounded-full">
-                                    <img src={user.photoURL?user.photoURL:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/1200px-Unknown_person.jpg"} />
+                            <div className="avatar online dropdown dropdown-end dropdown-hover">
+                                <div tabIndex={0} role="button" className="w-14 hover:border rounded-full">
+                                    <img src={user.photoURL ? user.photoURL : "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/1200px-Unknown_person.jpg"} />
                                 </div>
+                                <ul tabIndex={0} className="dropdown-content menu rounded  bg-white border  z-[1] w-52 p-2 shadow ">
+                                    <li className='border'><Link className='rounded-none' to="/profile">Profile</Link></li>
+                                    {role==="host" && <li className='border'><Link className='rounded-none' to="/dashboard">Dashboard</Link></li>}
+                                </ul>
                             </div>
                             <div>
                                 <a onClick={LogOutUser} className="btn rounded-sm md:btn-md btn-sm btn-outline">Log out</a>

@@ -1,6 +1,7 @@
 module.exports = {
   root: true,
-  env: { browser: true,node:true, es2020: true },
+  env: { browser: true,
+    <div className='text-3xl hover:text-gray-400 absolute bottom-0 rounded-b-full text-white bg-gray-500 bg-opacity-70 flex justify-center items-center w-full '><FaCamera /> </div> es2020: true },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',

@@ -52,16 +52,7 @@ const AuthProvider = ({ children }) => {
                     .then(res => {
                         // console.log('token response', res.data);
                     })
-                axios.post('http://localhost:5000/singup', {
-                    name: user?.displayName,
-                    email: user?.email,
-                    role: "guest",
-                    photoURL: user?.photoURL||"https://i.ibb.co/t3n0XR7/240.jpg",
-                    coverPhotoURL: "https://i.ibb.co/VDvGMbW/abstract-smooth-dark-blue-with-black-vignette-studio-well-use-as-backgroundbusiness-reportdigitalweb.jpg"
-                }).then(res => {
-                    console.log(res.data)
-
-                })
+                
             }
             setLoading(false)
             if (!currentUser) {

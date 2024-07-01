@@ -24,16 +24,16 @@ const AllUsers = () => {
         queryKey: ['allusers', inputSearch],
         queryFn: async () => {
             if (inputSearch) {
-                let url = `http://localhost:5000/allusers?search=${inputSearch}`
+                let url = `https://hotel-server-kappa.vercel.app/allusers?search=${inputSearch}`
                 if(/.+@.+\..+/.test(inputSearch)) {
-                    url=`http://localhost:5000/allusers?email=${inputSearch}`
+                    url=`https://hotel-server-kappa.vercel.app/allusers?email=${inputSearch}`
                 }
                 const res = await axios.get(url);
                 const data = res.data;
                 console.log(data);
                 return data;
             }
-            const res = await axios.get('http://localhost:5000/allusers');
+            const res = await axios.get('https://hotel-server-kappa.vercel.app/allusers');
             const data = res.data;
             return data;
         }
@@ -47,9 +47,9 @@ const AllUsers = () => {
     return (
         <div className="w-full min-h-screen">
             {/* NAV */}
-            <div className="flex justify-evenly flex-row-reverse w-full items-center min-h-16 border-b shadow-md">
+            <div className="flex justify-evenly flex-row-reverse w-full items-center h-16 border-b lg:shadow-md">
                 <div>
-                    <h1 className="text-xl font-bold whitespace-nowrap text-sky-500 text-first">All Users</h1>
+                    <h1 className="text-xl md:block hidden font-bold whitespace-nowrap text-sky-500 text-first">All Users</h1>
                 </div>
                 <fieldset className=" space-y-1 text-gray-700">
                     <label htmlFor="Search" className="hidden">Search</label>
@@ -65,8 +65,8 @@ const AllUsers = () => {
                 </fieldset>
             </div>
             {/* BODY */}
-            <div className="overflow-x-auto">
-                <table className="table">
+            <div className="overflow-x-auto overflow-y-auto">
+                <table className="table h-[calc(100vh-64px)]">
                     {/* head */}
                     <thead>
                         <tr>
@@ -74,7 +74,7 @@ const AllUsers = () => {
                                 Serial
                             </th>
                             <th>Name</th>
-                            <th>Email</th>
+                            <th className="lg:block hidden">Email</th>
                             <th>Role</th>
                             <th>Update role</th>
                         </tr>

@@ -8,7 +8,6 @@ import RoomDetails from "../Pages/Rooms/RoomDetails";
 import Login from "../Pages/Login/Login";
 import Singup from "../Pages/Singup/Singup";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
-import Mybooking from "../Pages/Mybooking/Mybooking";
 import Error from "../Pages/Error/Error";
 import DashboardLayout from "../Layout/DashboardLayout";
 import Profile from "../Pages/Profile/Profile";
@@ -16,6 +15,10 @@ import AllUsers from "../Pages/Dashboard/Host/AllUsers/Allusers";
 import Allrooms from "../Pages/Dashboard/Host/Alrooms/Allrooms";
 import Balance from "../Pages/Dashboard/Host/Balance/Balance";
 import HostRoutes from "../PrivateRoutes/HostRoutes";
+import Mybooking from "../Pages/Dashboard/Guest/Mybooking/Mybooking";
+import SingUpAdmin from "../Pages/Singup/SingUpAdmin";
+import Upload from "../Pages/Dashboard/Admin/Upload/Upload";
+import Viewallrooms from "../Pages/Dashboard/Admin/Viewallrooms/Viewallrooms";
 
 
 
@@ -32,7 +35,7 @@ const Routes = createBrowserRouter([
         },
         {
             path:'/profile',
-            element:<Profile/>
+            element:<PrivateRoutes><Profile/></PrivateRoutes>
         },
         {
             path:'/rooms',
@@ -61,10 +64,10 @@ const Routes = createBrowserRouter([
             element:<Singup/>
         },
         {
-            path:'/mybooking',
-            element:<PrivateRoutes><Mybooking/></PrivateRoutes> ,
-            
-        }
+            path:'/singup/admin',
+            element:<SingUpAdmin/>
+        },
+        
       ]
     },
     {
@@ -84,6 +87,22 @@ const Routes = createBrowserRouter([
                 path:'/dashboard/balance',
                 element:<HostRoutes><Balance/></HostRoutes>
             },
+            //guest
+            {
+                path:'/dashboard/guest',
+                element:<Mybooking/>
+            },
+            //admin
+            {
+                path:'/dashboard/admin',
+                element:<Upload/>
+            },
+            {
+                path:'/dashboard/admin/allrooms',
+                element:<Viewallrooms/>
+            },
+           
+
         ]
     }
   ]);

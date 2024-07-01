@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../Hook/useAuth";
 import PulseLoader from "react-spinners/PulseLoader"
 import MybookingList from "./MybookingList";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
+import useAuth from "../../../../Hook/useAuth";
 
 
 
@@ -11,10 +11,10 @@ const Mybooking = () => {
     const { user } = useAuth()
     const[MyData,setMyData]=useState(false)
 
-    const { isPending, data: mybooking } = useQuery({
+    const { isPending, data: mybooking, refetch } = useQuery({
         queryKey: ['roomsdata', user?.email,MyData],
         queryFn: async () => {
-            const res = await fetch(`https://hotel-server-kappa.vercel.app/mybooking?email=${user?.email}`)
+            const res = await fetch(`https://hotel-server-kappa.vercel.app/payment/${user?.email}`)
             return res.json()
         }
     })
@@ -27,7 +27,7 @@ const Mybooking = () => {
     }
 
     return (
-        <div className="overflow-x-auto md:px-14">
+        <div className="overflow-x-auto md:px-6 pt-14 w-full overscroll-y-auto h-[calc(100vh-56px)]">
              <Helmet>
                 <meta charSet="utf-8" />
                 <title>Hotel Spicy || My Booking</title>
@@ -46,7 +46,7 @@ const Mybooking = () => {
                 </thead>
                 <tbody >
                     {/* row 1 */}
-                    {mybooking && mybooking?.map((booking, idx) => <MybookingList setMyData={setMyData} MyData={MyData} booking={booking} key={idx}></MybookingList>)}
+                    {mybooking && mybooking?.map((booking, idx) => <MybookingList refetch={refetch} setMyData={setMyData} MyData={MyData} booking={booking} key={idx}></MybookingList>)}
                 </tbody>
                
             </table>

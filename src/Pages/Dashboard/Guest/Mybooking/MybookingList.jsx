@@ -4,20 +4,21 @@ import { FaRegEdit } from "react-icons/fa";
 import axios from 'axios';
 import { PropTypes } from 'prop-types';
 import toast from 'react-hot-toast';
-
-const MybookingList = ({ booking, setMyData, MyData }) => {
-    const { image, bookTitle, bookingDate, bookingID, _id ,  currentDate, } = booking || {};
+import { differenceInDays, isSameDay, parseISO } from 'date-fns';
 
 
-    const handleDelete = async (id, bookingID, currentDate) => {
+const MybookingList = ({ booking, setMyData, MyData,refetch }) => {
+    const { imageUrl, roomName, bookingDate, bookingID } = booking || {};
+
+
+    const handleDelete = async (bookingID) => {
         const today = new Date()
-        const bookingDateConvert = new Date(currentDate)
-        const diffrentdays =bookingDateConvert.getDate() - today.getDate(); 
-        const diffrentMonths =bookingDateConvert.getMonth() - today.getMonth(); 
-        const diffrentYears =bookingDateConvert.getFullYear() - today.getFullYear(); 
-        if(diffrentdays> 1|| diffrentMonths!==0 || diffrentYears!==0){
-          toast.error('Cancellation date expired');
-          return
+        const dateToCompare = parseISO(bookingDate);
+        const daysDifference = differenceInDays(dateToCompare,today );
+        const isSame = isSameDay(dateToCompare,today)
+        if (daysDifference > 1 || isSame===false ) {
+            toast.error('Cancellation date expired');
+            return
         }
 
         Swal.fire({
@@ -27,14 +28,14 @@ const MybookingList = ({ booking, setMyData, MyData }) => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
+            confirmButtonText: "Yes, cancel it!"
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`https://hotel-server-kappa.vercel.app/mybooking/${id}`)
+                axios.patch(`https://hotel-server-kappa.vercel.app/cancelBooking`,{bookingID})
                     .then(response => {
                         const data = response.data;
-                        if (data.deletedCount > 0) {
+                        if (data.modifiedCount > 0) {
                             Swal.fire({
                                 title: "Cancel!",
                                 text: "Your file has been Cancelled.",
@@ -42,6 +43,7 @@ const MybookingList = ({ booking, setMyData, MyData }) => {
                             });
                             axios.patch(`https://hotel-server-kappa.vercel.app/updateTrue/${bookingID}`, { Availability: true })
                             setMyData(!MyData);
+                            refetch()
 
                         }
                     })
@@ -56,9 +58,8 @@ const MybookingList = ({ booking, setMyData, MyData }) => {
     //update
     const handleUpdateDate = (e) => {
         e.preventDefault();
-        const id = _id;
         const updatedDate = e.target.date.value;
-        axios.patch(`https://hotel-server-kappa.vercel.app/updateDate/${id}`, { updatedDate })
+        axios.patch(`https://hotel-server-kappa.vercel.app/paymentDate`, { updatedDate, bookingID: bookingID })
             .then(response => {
                 const data = response.data;
                 if (data.modifiedCount > 0) {
@@ -81,20 +82,20 @@ const MybookingList = ({ booking, setMyData, MyData }) => {
                     <div className="flex items-center justify-center gap-3">
                         <div className="avatar">
                             <div className="mask mask-squircle w-12 h-12">
-                                <img src={image} alt="Avatar Tailwind CSS Component" />
+                                <img src={imageUrl} alt="Avatar Tailwind CSS Component" />
                             </div>
                         </div>
                     </div>
                 </td>
                 <td>
-                    {bookTitle}
+                    {roomName}
 
                 </td>
                 <td >
                     <div className="flex gap-2 text-center items-center justify-center" >{bookingDate}<span onClick={() => document.getElementById('my_modal_2').showModal()} className="text-xl  btn btn-xs rounded-sm "> <FaRegEdit /></span></div>
                 </td>
                 <td >
-                    <a onClick={() => handleDelete(_id, bookingID, currentDate)} className="btn btn-error btn-outline btn-xs">Cancel</a>
+                    <a onClick={() => handleDelete(bookingID)} className="btn btn-error btn-outline btn-xs">Cancel</a>
                 </td>
             </tr>
             {/* update date */}
@@ -103,7 +104,7 @@ const MybookingList = ({ booking, setMyData, MyData }) => {
                     <form className="flex flex-col p-4 gap-3" onSubmit={handleUpdateDate}>
                         <h1 className="text-3xl font-bold text-center">Update Your Date</h1>
                         <label className="input input-bordered flex items-center gap-2">
-                            <input type="date" name="date" className="grow" required />
+                            <input defaultValue={bookingDate} type="date" name="date" className="grow" required />
                         </label>
                         <button type="submit" className="btn btn-square rounded-sm btn-block" >Update</button>
                     </form>

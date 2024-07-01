@@ -4,10 +4,9 @@ import { Helmet } from "react-helmet";
 import { toast } from 'react-hot-toast';
 import axios from "axios";
 import { useState } from "react";
-import { IoMdArrowRoundBack } from "react-icons/io";
+import { IoMdArrowRoundBack } from 'react-icons/io';
 
-
-const Singup = () => {
+const SingUpAdmin = () => {
     const {creatUserGoogle,creatUserPassword,updateUserProfile,setUser} = useAuth();
     const navigate = useNavigate()
     const [loading,setLoading]=useState(false)
@@ -20,14 +19,15 @@ const Singup = () => {
         const password = e.target.password.value;
         try {
             const result = await creatUserPassword(email,password)
-            console.log(photo)
+            console.log(result,'2222222222222222')
              await updateUserProfile(name,photo);
              toast.success("Sing up successful")
-             axios.post('https://hotel-server-kappa.vercel.app/singup', {
+        
+            axios.post('https://hotel-server-kappa.vercel.app/singup', {
                 name: name,
                 email: email,
                 role:'admin' ,
-                photoURL: user?.photoURL||"https://i.ibb.co/t3n0XR7/240.jpg",
+                photoURL: photo || "https://i.ibb.co/t3n0XR7/240.jpg",
                 coverPhotoURL: "https://i.ibb.co/VDvGMbW/abstract-smooth-dark-blue-with-black-vignette-studio-well-use-as-backgroundbusiness-reportdigitalweb.jpg"
             }).then(res => {
                 console.log(res.data)
@@ -38,7 +38,7 @@ const Singup = () => {
              navigate('/')
              
         } catch (error) {
-        //    console.log(error);
+           console.log(error,'eeeeee');
            toast.error('Invaild email or password') 
            setLoading(false)
         }
@@ -57,9 +57,9 @@ const Singup = () => {
             </Helmet>
 
             <div className="w-full max-w-md mx-auto p-4 rounded-md shadow sm:p-8 bg-gray-900 bg-opacity-60  text-gray-100">
-                <Link className="btn rounded backdrop-blur-sm bg-transparent text-lg text-white" to="/singup/admin"><IoMdArrowRoundBack /> Sing up as Admin</Link>
+            <Link className="btn rounded backdrop-blur-sm bg-transparent text-lg text-white" to="/singup"><IoMdArrowRoundBack /> Sing up as Guest</Link>
                 <form onSubmit={handleSingup} className="space-y-4 py-4">
-                          <h1 className="text-xl text-center text-white font-bold">Guest Sing up</h1>
+                <h1 className="text-xl text-center text-white font-bold">Admin Sing up</h1>
                         <div className="space-y-2">
                             <label htmlFor="name" className="block text-sm">Name</label>
                             <input type="name" name="name" id="name" placeholder="Enter your name" className="w-full px-3 py-2 border rounded-md border-gray-700  text-gray-900 focus:border-violet-400" />
@@ -101,4 +101,4 @@ const Singup = () => {
     );
 };
 
-export default Singup;
+export default SingUpAdmin;

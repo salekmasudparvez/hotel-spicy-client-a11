@@ -9,7 +9,7 @@ const useRole = () => {
     queryKey: ['role', user?.email],
     enabled: !loading && !!user?.email,
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:5000/role/${user?.email}`)
+      const res = await axios.get(`https://hotel-server-kappa.vercel.app/role/${user?.email}`)
       const data = res?.data.role
       return data
     },

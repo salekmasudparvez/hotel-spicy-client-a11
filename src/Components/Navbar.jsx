@@ -11,7 +11,6 @@ const Navbar = () => {
     const links = <>
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/rooms'>Rooms</Link></li>
-        {user && <li><Link to='/mybooking'>My Bookings</Link></li>}
         <li><Link to='/aboutus'>About Us</Link></li>
         <li><Link to='/contact'>Contact</Link></li>
     </>
@@ -44,6 +43,8 @@ const Navbar = () => {
                                 <ul tabIndex={0} className="dropdown-content menu rounded  bg-white border  z-[1] w-52 p-2 shadow ">
                                     <li className='border'><Link className='rounded-none' to="/profile">Profile</Link></li>
                                     {role==="host" && <li className='border'><Link className='rounded-none' to="/dashboard">Dashboard</Link></li>}
+                                    {role==="guest" && <li className='border'><Link className='rounded-none' to="/dashboard/guest">Dashboard</Link></li>}
+                                    {role==="admin" && <li className='border'><Link className='rounded-none' to="/dashboard/admin">Dashboard</Link></li>}
                                 </ul>
                             </div>
                             <div>

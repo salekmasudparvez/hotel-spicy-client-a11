@@ -15,7 +15,7 @@ const Allrooms = () => {
     const { isLoading, refetch, data: allStudySessions } = useQuery({
         queryKey: ['allrooms', tabIndex],
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/allrooms?id=${tabIndex}`)
+            const res = await axios.get(`https://hotel-server-kappa.vercel.app/allrooms?id=${tabIndex}`)
             const data = res.data;
             // console.log(data, tabIndex)
             return data;
@@ -33,11 +33,12 @@ const Allrooms = () => {
         <div className="  w-full">
             <table className="table ">
                 {/* head */}
-                <thead className='sticky top-10 bg-white'>
+                <thead className='sticky top-16 bg-white'>
                     <tr >
-                        <th></th>
+                        <th>No.</th>
+                        <th className="lg:block hidden">Image</th>
                         <th>Title</th>
-                        <th>Session&apos;s Drescription</th>
+                        <th className="lg:block hidden">Room&apos;s Drescription</th>
                         <th> {Status==="approved"?<><span className='text-sky-500'>Update</span> / <span className='text-red-500'>Delete</span></>:<><span className='text-green-500'>Approved</span> / <span className='text-red-500'>Reject</span></>}</th>
                     </tr>
                 </thead>
@@ -51,13 +52,13 @@ const Allrooms = () => {
     </>
 
     return (<div
-        className='p-3 overflow-y-auto max-h-screen w-full relative overflow-x-auto'>
-        <Tabs defaultIndex={tabIndezx} onSelect={(index) => setTabIndex(index)}>
-           <div className='backdrop-blur bg-white z-10 sticky top-0 '>
-            <TabList className="">
-                <Tab>Pending Rooms</Tab>
-                <Tab>Rejected Rooms</Tab>
-                <Tab>Approved Rooms</Tab>
+        className='px-3 overflow-y-auto max-h-screen bg-white w-full relative overflow-x-auto'>
+        <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+           <div className='backdrop-blur py-5 bg-white z-10 sticky top-0 '>
+            <TabList className="md:text-lg text-sm whitespace-nowrap flex justify-center ga">
+                <Tab>Pending </Tab>
+                <Tab>Rejected </Tab>
+                <Tab>Approved </Tab>
             </TabList>
            </div>
             

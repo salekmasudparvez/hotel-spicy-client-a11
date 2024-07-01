@@ -16,7 +16,7 @@ const UserRow = ({user,setloadingUpdate,refetch,idx}) => {
             updateRole,
         }
         try {
-            await axios.patch('http://localhost:5000/allusers',updateRoleDoc)
+            await axios.patch('https://hotel-server-kappa.vercel.app/allusers',updateRoleDoc)
             .then(res=>{
                 if(res){
                     setloadingUpdate(false);
@@ -31,13 +31,13 @@ const UserRow = ({user,setloadingUpdate,refetch,idx}) => {
         }
     }
     return (
-        <tr>
-            <th>
+        <tr >
+            <th className='place-content-center'>
                 {idx+1}
             </th>
-            <td>
-                <div className="flex items-center gap-3">
-                    <div className="avatar">
+            <td className='place-content-center'>
+                <div className="flex  items-center gap-3">
+                    <div className="avatar lg:block hidden">
                         <div className="mask mask-squircle w-12 h-12">
                             <img src={photoURL} alt="Avatar Tailwind CSS Component" />
                         </div>
@@ -48,11 +48,11 @@ const UserRow = ({user,setloadingUpdate,refetch,idx}) => {
                     </div>
                 </div>
             </td>
-            <td>
+            <td className="lg:block hidden place-content-center h-full">
                 {email}
             </td>
-            <td><span className={`py-1 rounded-full ${role === "admin" ? 'bg-purple-200 px-2 ' : role === "guest" ? "bg-sky-200 px-2 " : role === "host" ? "bg-orange-200 px-2 " : null}`}>{role}</span> </td>
-            <th className="min-w-32 whitespace-nowrap">
+            <td className='place-content-center'><span className={`py-1 rounded-full ${role === "admin" ? 'bg-purple-200 px-2 ' : role === "guest" ? "bg-sky-200 px-2 " : role === "host" ? "bg-orange-200 px-2 " : null}`}>{role}</span> </td>
+            <th className="min-w-32 whitespace-nowrap place-content-center">
                 <select ref={select} onChange={handleUpdateRole} value={role} className="border rounded-full  text-second font-normal p-2 border-second w-full max-w-28">
                     {/* <option disabled selected>Update role</option>  */}
                     <option value="guest">Guest</option>

@@ -13,7 +13,7 @@ const Profile = () => {
         queryKey: ['user', user?.email],
         enabled:!!user?.email,
         queryFn: async () => {
-            const res = await axios.get(`http://localhost:5000/user/${user.email}`)
+            const res = await axios.get(`https://hotel-server-kappa.vercel.app/user/${user.email}`)
             return res.data
         }
     })
@@ -65,10 +65,13 @@ const Profile = () => {
             <div>
                 <div className="border-2 border-gray-500 border-opacity-50 p-5">
 
-                    <h1 className="text-xl font-medium">Purchess History</h1>
+                   { role === "guest" && <h1 className="text-xl font-medium">Purchess history</h1>}
+                   { role === "admin" && <h1 className="text-xl font-medium">Admin profile</h1>}
+                   { role === "host" && <h1 className="text-xl font-sans text-red-500 font-medium">Host profile</h1>}
 
                 </div>
                 <div>
+                    {role === "guest" && 
                     <div className="overflow-x-auto">
                         <table className="table">
                             {/* head */}
@@ -146,7 +149,7 @@ const Profile = () => {
                                 </tr>
                             </tfoot>
                         </table>
-                    </div>
+                    </div>}
                 </div>
             </div>
 

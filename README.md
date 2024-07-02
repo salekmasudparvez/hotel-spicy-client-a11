@@ -25,3 +25,8 @@ Currently, two official plugins are available:
  assignment_category_0004
 
 [Live-Link](https://hotel-spicy.netlify.app/) 
+
+# For the project 
+I utilized HTML, CSS, Tailwind (CSS framework), JavaScript,
+React, Express.js, MongoDB, and Firebase for authentication.
+

@@ -1,3 +1,15 @@
+## How to run this project
+first you have clone this project and then
+
+Step-1:
+```bash
+  npm install
+```
+Step-2:
+```bash
+  npm run dev
+```
+
 # Hotel-Spicy
 
 Hotel Spicy offers a delightful stay experience blending comfort and affordability. With tastefully designed rooms, modern amenities, and attentive service, we ensure every guest enjoys a memorable stay. Conveniently located amidst vibrant surroundings, our hotel is the perfect choice for both leisure and business travelers seeking comfort and convenience.
